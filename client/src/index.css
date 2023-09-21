@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.MuiGrid-root .MuiGrid-container .MuiGrid-spacing-xs-2 .css-1xwhd4u-MuiGrid-root {
+  margin: 20px 0 !important;
+  width: 100% !important;
+}
+
+.MuiGrid-root .MuiGrid-container .MuiGrid-spacing-xs-2 .css-1xwhd4u-MuiGrid-root {
+  margin: 0 !important;
+  width: auto !important;
+}
