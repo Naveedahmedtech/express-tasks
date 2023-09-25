@@ -1,5 +1,10 @@
 const express = require("express");
-const { createTask, getAllTasks } = require("../controller/taskController");
+const {
+  createTask,
+  getAllTasks,
+  updateTask,
+  deleteTask,
+} = require("../controller/taskController");
 const {
   taskBody,
   handleValidationErrors,
@@ -10,12 +15,13 @@ const router = express.Router();
 
 router.post(
   "/create",
-  upload.single("image"),
+  upload.single("file"),
   taskBody,
   handleValidationErrors,
   createTask
 );
-
-router.get('/all-tasks', getAllTasks)
+router.put("/update-task/:id", upload.single("file"), updateTask);
+router.delete("/delete-task/:id", deleteTask);
+router.get("/all-tasks", getAllTasks);
 
 module.exports = router;

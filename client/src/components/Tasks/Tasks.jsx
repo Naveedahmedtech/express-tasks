@@ -1,13 +1,21 @@
-import { Grid, Container, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Grid,
+  Container,
+  useMediaQuery,
+  useTheme,
+  CardActions,
+  Button,
+} from "@mui/material";
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { get } from "../../services/services";
+import { NavLink } from "react-router-dom";
 
 const Tasks = () => {
-    const [tasks, setTasks] = React.useState([]);
+  const [tasks, setTasks] = React.useState([]);
 
   const cardStyle = {
     width: "100%",
@@ -20,22 +28,20 @@ const Tasks = () => {
 
   React.useEffect(() => {
     const getTasks = async () => {
-        const { res, err } = await get('/tasks/all-tasks');
-        if (err) { 
-            console.log(err)
-        }
-        console.log(res)
-        setTasks(res?.data?.tasks)
-      };
-      getTasks();
+      const { res, err } = await get("/tasks/all-tasks");
+      if (err) {
+        console.log(err);
+      }
+      setTasks(res?.data?.tasks);
+    };
+    getTasks();
   }, []);
-
-    console.log(tasks)
 
   return (
     <Container disableGutters>
       <Grid container spacing={2} sx={{ m: 5, width: "100%" }}>
-        {tasks.length > 0 && tasks?.map(task => (
+        {tasks.length > 0 &&
+          tasks?.map((task) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={task._id}>
               <Card sx={cardStyle}>
                 <CardMedia
@@ -56,6 +62,13 @@ const Tasks = () => {
                     {task.description}
                   </Typography>
                 </CardContent>
+                <CardActions>
+                  <NavLink to={`/task-view/${task._id}`}>
+                    <Button fullWidth variant="contained">
+                      View
+                    </Button>
+                  </NavLink>
+                </CardActions>
               </Card>
             </Grid>
           ))}
